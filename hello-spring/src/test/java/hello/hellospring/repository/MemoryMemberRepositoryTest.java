@@ -1,15 +1,21 @@
 package hello.hellospring.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import hello.hellospring.domain.Member;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
 
+
+//    테스트는 각각 독립적으로 실행되어야 한다. 테스트 순서에 의존관계가 있는 것은 좋은 테스트가 아니다.
 public class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
+    //    @AfterEach : 한번에 여러 테스트를 실행하면 메모리 DB에 직전 테스트의 결과가 남을 수 있다. 이렇게
+//    되면 다음 이전 테스트 때문에 다음 테스트가 실패할 가능성이 있다. @AfterEach 를 사용하면 각 테스트가
+//    종료될 때 마다 이 기능을 실행한다. 여기서는 메모리 DB에 저장된 데이터를 삭제한다.
     @AfterEach
     public void afterEach() {
         repository.clearStore();
@@ -26,6 +32,7 @@ public class MemoryMemberRepositoryTest {
         Member result = repository.findById(member.getId()).get();
         assertThat(result).isEqualTo(member);
     }
+
     @Test
     public void findByName() {
 //given

@@ -10,13 +10,18 @@ repositories {
 	mavenCentral()
 }
 
+// spring-boot-starter(공통): 스프링 부트 + 스프링 코어 + 로깅
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // 내부에 jdbc 관련 라이브러리를 포함. 따라서 jdbc는 제거해도 된다.
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	runtimeOnly 'com.h2database:h2'
 	compileOnly("org.springframework.boot:spring-boot-devtools")
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	// spring-boot-devtools 라이브러리를 추가하면, html 파일을 컴파일만 해주면 서버 재시작 없이
+	//	View 파일 변경이 가능하다.
+	//	> 인텔리J 컴파일 방법: 메뉴 build Recompile
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임리프 템플릿 엔진(View)
+	implementation 'org.springframework.boot:spring-boot-starter-web' // 포함 : spring-webmvc: 스프링 웹 MVC, spring-boot-starter-tomcat: 톰캣 (웹서버)
+	testImplementation('org.springframework.boot:spring-boot-starter-test') { // 테스트 라이브러리
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
