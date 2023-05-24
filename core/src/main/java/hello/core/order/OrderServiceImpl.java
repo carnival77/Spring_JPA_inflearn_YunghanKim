@@ -38,6 +38,11 @@ public class OrderServiceImpl implements OrderService {
 //    OrderServiceImpl 은 이제부터 실행에만 집중하면 된다.
 //    OrderServiceImpl 에는 MemoryMemberRepository , FixDiscountPolicy 객체의 의존관계가 주입된다.
 
+    //테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);

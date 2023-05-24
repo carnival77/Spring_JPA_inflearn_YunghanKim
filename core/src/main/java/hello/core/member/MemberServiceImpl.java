@@ -27,6 +27,11 @@ public class MemberServiceImpl implements MemberService {
 //    몰라도 된다.
     //관심사의 분리: 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확히 분리되었다.
 
+    //테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     public void join(Member member) {
         memberRepository.save(member);
     }
