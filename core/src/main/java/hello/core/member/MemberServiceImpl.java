@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService {
 
     // DIP 위반 : 의존관계가 추상(인터페이스)(memberRepository) 뿐만 아니라 구체(구현) 클래스(MemoryMemberRepository)까지 모두 의존하는 문제점이 있음
@@ -12,6 +16,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     // AppConfig는 생성한 객체 인스턴스의 참조(레퍼런스)를 생성자를 통해서 주입(연결)해준다
+    @Autowired // 생성자에 @Autowired 를 지정하면, 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 주입 - AutoAppConfig
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
