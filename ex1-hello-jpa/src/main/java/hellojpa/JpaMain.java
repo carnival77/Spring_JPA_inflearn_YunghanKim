@@ -31,15 +31,25 @@ public class JpaMain {
 //            System.out.println("findMember.name = "+findMember.getName());
 
             // JPQL
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                .setFirstResult(1)
-                .setMaxResults(10)
-                .getResultList();
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                .setFirstResult(1)
+//                .setMaxResults(10)
+//                .getResultList();
+//
+//            for (Member member :
+//                result) {
+//                System.out.println("member.name = "+member.getName());
+//            }
 
-            for (Member member :
-                result) {
-                System.out.println("member.name = "+member.getName());
-            }
+            // 비영속
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("HelloB");
+
+            //영속
+            System.out.println("==== BEFORE ====");
+            em.persist(member);
+            System.out.println("==== AFTER ====");
 
             tx.commit();
         }catch (Exception e){
